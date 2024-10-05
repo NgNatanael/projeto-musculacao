@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitoramento de Treinos e Evolução</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Monitoramento de Treinos e Evolução</h1>
+    </header>
+    <nav>
+        <button onclick="mostrarSecao('treino')">Registrar Treino</button>
+        <button onclick="mostrarSecao('evolucao')">Evolução</button>
+    </nav>
+
+    <section id="treino" class="ativo">
+        <h2>Registrar Treino</h2>
+        <form id="form-treino">
+            <label for="data-treino">Data:</label>
+            <input type="date" id="data-treino" required>
+            <label for="exercicio">Exercício:</label>
+            <input type="text" id="exercicio" required>
+            <label for="peso">Peso (kg):</label>
+            <input type="number" id="peso" required>
+            <button type="submit">Salvar Treino</button>
+        </form>
+        <div id="lista-treino"></div>
+    </section>
+
+    <section id="evolucao">
+        <h2>Minha Evolução</h2>
+        <form id="form-evolucao">
+            <label for="peso-corporal">Peso Corporal (kg):</label>
+            <input type="number" id="peso-corporal" required>
+            <label for="observacao">Observação:</label>
+            <input type="text" id="observacao">
+            <button type="submit">Salvar Evolução</button>
+        </form>
+        <div id="lista-evolucao"></div>
+    </section>
+
+    <script type="module" src="js/script.js"></script>
+</body>
+</html>
