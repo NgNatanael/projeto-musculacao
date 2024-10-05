@@ -1,6 +1,6 @@
 // Importações do Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
-import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
 
 // Configuração do Firebase
 const firebaseConfig = {
@@ -18,28 +18,28 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 function mostrarSecao(secaoId) {
-    // Ocultar todas as seções e exibir apenas a selecionada
     document.querySelectorAll("section").forEach(secao => secao.classList.remove("ativo"));
     document.getElementById(secaoId).classList.add("ativo");
 }
 
-// Função para salvar treino no Firestore
+// Salva o treino no Firestore
 async function salvarTreino() {
     const treino = {
         data: document.getElementById("data-treino").value,
         exercicio: document.getElementById("exercicio").value,
-        peso: document.getElementById("peso").value
+        peso: document.getElementById("peso").value,
+        repeticoes: document.getElementById("repeticoes").value
     };
     try {
         await addDoc(collection(db, "treinos"), treino);
         console.log("Treino salvo com sucesso!");
-        listarTreinos(); // Atualiza a lista de treinos
+        listarTreinos();
     } catch (error) {
         console.error("Erro ao salvar treino: ", error);
     }
 }
 
-// Função para salvar evolução no Firestore
+// Salva a evolução no Firestore
 async function salvarEvolucao() {
     const evolucao = {
         pesoCorporal: document.getElementById("peso-corporal").value,
@@ -48,27 +48,45 @@ async function salvarEvolucao() {
     try {
         await addDoc(collection(db, "evolucao"), evolucao);
         console.log("Evolução salva com sucesso!");
-        listarEvolucoes(); // Atualiza a lista de evoluções
+        listarEvolucoes();
     } catch (error) {
         console.error("Erro ao salvar evolução: ", error);
     }
 }
 
-// Função para listar treinos
+// Listar treino do dia
+async function listarTreinoDoDia() {
+    const hoje = new Date().toISOString().split('T')[0];
+    const treinoDoDiaContainer = document.getElementById("treino-do-dia");
+    treinoDoDiaContainer.innerHTML = `<h3>Treino para: ${hoje}</h3>`;
+    
+    const q = query(collection(db, "treinos"), where("data", "==", hoje));
+    const querySnapshot = await getDocs(q);
+    
+    if (!querySnapshot.empty) {
+        querySnapshot.forEach(doc => {
+            const treino = doc.data();
+            treinoDoDiaContainer.innerHTML += `<p>${treino.exercicio} - ${treino.peso}kg - ${treino.repeticoes} repetições</p>`;
+        });
+    } else {
+        treinoDoDiaContainer.innerHTML += `<p>Nenhum treino registrado para hoje.</p>`;
+    }
+}
+
+// Listar todos os treinos e evoluções
 async function listarTreinos() {
     const listaTreino = document.getElementById("lista-treino");
-    listaTreino.innerHTML = ""; // Limpa a lista
+    listaTreino.innerHTML = "";
     const querySnapshot = await getDocs(collection(db, "treinos"));
     querySnapshot.forEach(doc => {
         const treino = doc.data();
-        listaTreino.innerHTML += `<p>${treino.data} - ${treino.exercicio} - ${treino.peso}kg</p>`;
+        listaTreino.innerHTML += `<p>${treino.data} - ${treino.exercicio} - ${treino.peso}kg - ${treino.repeticoes} repetições</p>`;
     });
 }
 
-// Função para listar evoluções
 async function listarEvolucoes() {
     const listaEvolucao = document.getElementById("lista-evolucao");
-    listaEvolucao.innerHTML = ""; // Limpa a lista
+    listaEvolucao.innerHTML = "";
     const querySnapshot = await getDocs(collection(db, "evolucao"));
     querySnapshot.forEach(doc => {
         const evolucao = doc.data();
@@ -80,17 +98,18 @@ async function listarEvolucoes() {
 document.getElementById("form-treino").addEventListener("submit", (event) => {
     event.preventDefault();
     salvarTreino();
-    event.target.reset(); // Limpa o formulário após o envio
+    event.target.reset();
 });
 
 document.getElementById("form-evolucao").addEventListener("submit", (event) => {
     event.preventDefault();
     salvarEvolucao();
-    event.target.reset(); // Limpa o formulário após o envio
+    event.target.reset();
 });
 
-// Carregar dados ao iniciar
+// Carregar dados ao iniciar e mostrar o treino do dia
 window.addEventListener("load", () => {
     listarTreinos();
     listarEvolucoes();
+    listarTreinoDoDia();
 });
