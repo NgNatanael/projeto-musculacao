@@ -15,16 +15,32 @@
     <main>
         <section id="treino-dia">
             <h2>Treino para Hoje</h2>
-            <div id="treino-do-dia"></div>
+
+            <h3>Lista A</h3>
+            <div id="lista-a">
+                <!-- Lista A de Exercícios -->
+            </div>
+
+            <h3>Lista B</h3>
+            <div id="lista-b">
+                <!-- Lista B de Exercícios -->
+            </div>
+
+            <h3>Lista C</h3>
+            <div id="lista-c">
+                <!-- Lista C de Exercícios -->
+            </div>
         </section>
     </main>
 
     <script type="module">
         document.addEventListener("DOMContentLoaded", () => {
-            const treinoDoDiaContainer = document.getElementById("treino-do-dia");
+            const listaAContainer = document.getElementById("lista-a");
+            const listaBContainer = document.getElementById("lista-b");
+            const listaCContainer = document.getElementById("lista-c");
 
-            // Lista de exercícios predefinida
-            const exercicios = [
+            // Lista A de exercícios
+            const exerciciosA = [
                 "SUPINO RETO",
                 "CROS OVER",
                 "SUPINO INCLINADO",
@@ -35,15 +51,54 @@
                 "ROSCA SIMULTANEA"
             ];
 
-            // Adicionar os exercícios na página com repetições e intervalo
-            exercicios.forEach(exercicio => {
-                treinoDoDiaContainer.innerHTML += `
-                    <p>Exercício: <strong>${exercicio}</strong></p>
-                    <p>Séries: 4</p>
-                    <p>Intervalo: 30 segundos</p>
-                    <hr>
-                `;
-            });
+            // Lista B de exercícios
+            const exerciciosB = [
+                "BICICLETA (15 minutos)",
+                "CADEIRA EXTENSORA",
+                "HACK",
+                "LEG PRESS 45°",
+                "AGACHAMENTO LIVRE",
+                "CADEIRA FLEXORA",
+                "DESENVOLVIMENTO ARTICULADO",
+                "ELEVAÇÃO FRONTAL C/ ANILHAS",
+                "ELEVAÇÃO LATERAL",
+                "ELEVAÇÃO CURVADA",
+                "ELEVAÇÃO DE PERNAS NA PARALELA",
+                "ABDOMINAL",
+                "PRANCHA"
+            ];
+
+            // Lista C de exercícios
+            const exerciciosC = [
+                "PULLEY FRENTE",
+                "PULLDOW",
+                "PULLEY FRENTE C/ TRIANGULO",
+                "REMADA BAIXA POLIA",
+                "HIPEREXTENSÃO LOMBAR",
+                "ENCOLHIMENTO",
+                "TRÍCEPS PULLEY",
+                "TRÍCEPS PULLEY CORDA",
+                "TRÍCEPS FRANCÊS UNI",
+                "TRÍCEPS COICE",
+                "ESTEIRA (15 minutos)"
+            ];
+
+            // Função para adicionar exercícios em uma lista
+            function adicionarExercicios(container, exercicios) {
+                exercicios.forEach(exercicio => {
+                    container.innerHTML += `
+                        <p>Exercício: <strong>${exercicio}</strong></p>
+                        <p>Séries: 4</p>
+                        <p>Intervalo: 30 segundos</p>
+                        <hr>
+                    `;
+                });
+            }
+
+            // Adiciona os exercícios às respectivas listas
+            adicionarExercicios(listaAContainer, exerciciosA);
+            adicionarExercicios(listaBContainer, exerciciosB);
+            adicionarExercicios(listaCContainer, exerciciosC);
         });
     </script>
 </body>
