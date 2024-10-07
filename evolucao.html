@@ -15,10 +15,14 @@
     <main>
         <section id="evolucao">
             <h2>Resumo da Evolução</h2>
-            <div id="resumo-evolucao"></div>
+            <div id="resumo-evolucao" class="resumo-card">
+                <!-- Resumo será preenchido via JavaScript -->
+            </div>
 
             <h2>Treinos Registrados</h2>
-            <div id="lista-treinos-evolucao"></div>
+            <div id="lista-treinos-evolucao" class="treino-lista">
+                <!-- Lista de treinos será preenchida via JavaScript -->
+            </div>
         </section>
     </main>
 
@@ -54,18 +58,25 @@
                 totalRepeticoes += parseFloat(treino.repeticoes);
                 numTreinos++;
 
+                // Exibindo os treinos de forma mais visual
                 listaTreinosContainer.innerHTML += `
-                    <p>Data: ${treino.data} - Exercício: ${treino.exercicio} - Peso: ${treino.peso}kg - Repetições: ${treino.repeticoes}</p>
+                    <div class="treino-item">
+                        <p><strong>Data:</strong> ${treino.data}</p>
+                        <p><strong>Exercício:</strong> ${treino.exercicio}</p>
+                        <p><strong>Peso:</strong> ${treino.peso}kg</p>
+                        <p><strong>Repetições:</strong> ${treino.repeticoes}</p>
+                    </div>
                 `;
             });
 
             const mediaPeso = numTreinos > 0 ? (totalPeso / numTreinos).toFixed(2) : 0;
             const mediaRepeticoes = numTreinos > 0 ? (totalRepeticoes / numTreinos).toFixed(2) : 0;
 
+            // Exibindo o resumo de forma organizada
             resumoEvolucaoContainer.innerHTML = `
-                <p>Número Total de Treinos: ${numTreinos}</p>
-                <p>Média de Peso Levantado: ${mediaPeso} kg</p>
-                <p>Média de Repetições: ${mediaRepeticoes}</p>
+                <p><strong>Número Total de Treinos:</strong> ${numTreinos}</p>
+                <p><strong>Média de Peso Levantado:</strong> ${mediaPeso} kg</p>
+                <p><strong>Média de Repetições:</strong> ${mediaRepeticoes}</p>
             `;
         }
 

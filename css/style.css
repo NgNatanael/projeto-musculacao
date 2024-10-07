@@ -24,43 +24,45 @@ h1, h2 {
     font-weight: 500;
 }
 
-.treino-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
-
-.treino-card {
+.resumo-card {
     background-color: white;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
-    max-width: 350px;
     margin-bottom: 20px;
 }
 
-.treino-card h3 {
-    font-size: 1.5em;
+.treino-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
     margin-bottom: 15px;
-    display: flex;
-    align-items: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.treino-card h3 i {
-    margin-right: 10px;
-}
-
-.exercicio-item {
-    margin-bottom: 15px;
-}
-
-.exercicio-item p {
+.treino-item p {
     margin: 5px 0;
 }
 
-.exercicio-item strong {
-    color: #2E7D32;
+/* Efeitos de Hover para Interatividade */
+.treino-item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #2E7D32;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #45a049;
 }
 
 hr {
