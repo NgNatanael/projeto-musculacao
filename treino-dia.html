@@ -1,70 +1,109 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #F5F5F5;
-    color: #333;
-}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treino do Dia</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <h1><i class="fas fa-dumbbell"></i> Treino do Dia</h1>
+    </header>
 
-.header {
-    background-color: #2E7D32;
-    padding: 20px;
-    text-align: center;
-    color: white;
-}
+    <main>
+        <section id="treino-dia">
+            <h2>Treino para Hoje</h2>
 
-main {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-}
+            <div class="treino-container">
+                <div class="treino-card">
+                    <h3><i class="fas fa-arrow-right"></i> Lista A</h3>
+                    <div id="lista-a"></div>
+                </div>
 
-h1, h2 {
-    margin-bottom: 20px;
-    font-weight: 500;
-}
+                <div class="treino-card">
+                    <h3><i class="fas fa-arrow-right"></i> Lista B</h3>
+                    <div id="lista-b"></div>
+                </div>
 
-.treino-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-}
+                <div class="treino-card">
+                    <h3><i class="fas fa-arrow-right"></i> Lista C</h3>
+                    <div id="lista-c"></div>
+                </div>
+            </div>
+        </section>
+    </main>
 
-.treino-card {
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 100%;
-    max-width: 350px;
-    margin-bottom: 20px;
-}
+    <script type="module">
+        document.addEventListener("DOMContentLoaded", () => {
+            const listaAContainer = document.getElementById("lista-a");
+            const listaBContainer = document.getElementById("lista-b");
+            const listaCContainer = document.getElementById("lista-c");
 
-.treino-card h3 {
-    font-size: 1.5em;
-    margin-bottom: 15px;
-    display: flex;
-    align-items: center;
-}
+            // Lista A de exercícios
+            const exerciciosA = [
+                "SUPINO RETO",
+                "CROS OVER",
+                "SUPINO INCLINADO",
+                "FLY MAQ",
+                "ROSCA INVERSA",
+                "ROSCA DIRETA",
+                "ROSCA C/ CORDA",
+                "ROSCA SIMULTANEA"
+            ];
 
-.treino-card h3 i {
-    margin-right: 10px;
-}
+            // Lista B de exercícios
+            const exerciciosB = [
+                "BICICLETA (15 minutos)",
+                "CADEIRA EXTENSORA",
+                "HACK",
+                "LEG PRESS 45°",
+                "AGACHAMENTO LIVRE",
+                "CADEIRA FLEXORA",
+                "DESENVOLVIMENTO ARTICULADO",
+                "ELEVAÇÃO FRONTAL C/ ANILHAS",
+                "ELEVAÇÃO LATERAL",
+                "ELEVAÇÃO CURVADA",
+                "ELEVAÇÃO DE PERNAS NA PARALELA",
+                "ABDOMINAL",
+                "PRANCHA"
+            ];
 
-.exercicio-item {
-    margin-bottom: 15px;
-}
+            // Lista C de exercícios
+            const exerciciosC = [
+                "PULLEY FRENTE",
+                "PULLDOW",
+                "PULLEY FRENTE C/ TRIANGULO",
+                "REMADA BAIXA POLIA",
+                "HIPEREXTENSÃO LOMBAR",
+                "ENCOLHIMENTO",
+                "TRÍCEPS PULLEY",
+                "TRÍCEPS PULLEY CORDA",
+                "TRÍCEPS FRANCÊS UNI",
+                "TRÍCEPS COICE",
+                "ESTEIRA (15 minutos)"
+            ];
 
-.exercicio-item p {
-    margin: 5px 0;
-}
+            // Função para adicionar exercícios em uma lista
+            function adicionarExercicios(container, exercicios) {
+                exercicios.forEach(exercicio => {
+                    container.innerHTML += `
+                        <div class="exercicio-item">
+                            <p><strong>${exercicio}</strong></p>
+                            <p>Séries: 4</p>
+                            <p>Intervalo: 30 segundos</p>
+                        </div>
+                    `;
+                });
+            }
 
-.exercicio-item strong {
-    color: #2E7D32;
-}
-
-hr {
-    border: none;
-    border-top: 1px solid #ddd;
-    margin: 20px 0;
-}
+            // Adiciona os exercícios às respectivas listas
+            adicionarExercicios(listaAContainer, exerciciosA);
+            adicionarExercicios(listaBContainer, exerciciosB);
+            adicionarExercicios(listaCContainer, exerciciosC);
+        });
+    </script>
+</body>
+</html>
