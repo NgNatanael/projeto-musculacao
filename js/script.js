@@ -92,15 +92,33 @@ async function listarTreinos() {
     });
 }
 
-// Função para listar todas as evoluções salvas
+// Função para listar todas as evoluções salvas e processar os dados
 async function listarEvolucoes() {
     const listaEvolucao = document.getElementById("lista-evolucao");
     listaEvolucao.innerHTML = ""; // Limpa a lista de evoluções antes de atualizá-la
-    const querySnapshot = await getDocs(collection(db, "evolucoes"));
+    
+    let totalPeso = 0;
+    let totalRepeticoes = 0;
+    let numTreinos = 0;
+
+    const querySnapshot = await getDocs(collection(db, "treinos"));
     querySnapshot.forEach(doc => {
-        const evolucao = doc.data();
-        listaEvolucao.innerHTML += `<p>${evolucao.pesoCorporal}kg - ${evolucao.observacao}</p>`;
+        const treino = doc.data();
+        totalPeso += parseFloat(treino.peso);
+        totalRepeticoes += parseFloat(treino.repeticoes);
+        numTreinos++;
     });
+
+    // Calcular média de peso e repetições
+    const mediaPeso = numTreinos > 0 ? (totalPeso / numTreinos).toFixed(2) : 0;
+    const mediaRepeticoes = numTreinos > 0 ? (totalRepeticoes / numTreinos).toFixed(2) : 0;
+
+    // Exibir os resultados processados
+    listaEvolucao.innerHTML = `
+        <p>Número de Treinos: ${numTreinos}</p>
+        <p>Média de Peso Levantado: ${mediaPeso} kg</p>
+        <p>Média de Repetições: ${mediaRepeticoes} repetições</p>
+    `;
 }
 
 // Event listeners para submissão dos formulários

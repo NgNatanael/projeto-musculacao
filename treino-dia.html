@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treino do Dia</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Treino do Dia</h1>
+    </header>
+
+    <section id="treino-dia">
+        <h2>Treino para Hoje</h2>
+        <div id="treino-do-dia"></div>
+    </section>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAWevtkjUECk9he94FX4o8Wg8kh8pGRGgk",
+            authDomain: "projeto-musculacao.firebaseapp.com",
+            projectId: "projeto-musculacao",
+            storageBucket: "projeto-musculacao.appspot.com",
+            messagingSenderId: "1027024998979",
+            appId: "1:1027024998979:web:033ea83e199ed58d4e3af6",
+            measurementId: "G-PCXHZL7650"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function listarTreinoDoDia() {
+            const hoje = new Date().toISOString().split('T')[0];
+            const treinoDoDiaContainer = document.getElementById("treino-do-dia");
+            treinoDoDiaContainer.innerHTML = `<h3>Treino para: ${hoje}</h3>`;
+
+            const q = query(collection(db, "treinos"), where("data", "==", hoje));
+            const querySnapshot = await getDocs(q);
+
+            if (!querySnapshot.empty) {
+                querySnapshot.forEach(doc => {
+                    const treino = doc.data();
+                    treinoDoDiaContainer.innerHTML += `<p>${treino.exercicio} - ${treino.peso}kg - ${treino.repeticoes} repetições</p>`;
+                });
+            } else {
+                treinoDoDiaContainer.innerHTML += `<p>Nenhum treino registrado para hoje.</p>`;
+            }
+        }
+
+        window.addEventListener("load", listarTreinoDoDia);
+    </script>
+</body>
+</html>

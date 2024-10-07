@@ -13,9 +13,10 @@
     <nav>
         <button onclick="mostrarSecao('treino')">Registrar Treino</button>
         <button onclick="mostrarSecao('evolucao')">Evolução</button>
-        <button onclick="mostrarSecao('treino-dia')">Treino do Dia</button>
+        <button onclick="window.open('treino-dia.html', '_blank')">Treino do Dia</button>
     </nav>
 
+    <!-- Seção para Registrar Treino -->
     <section id="treino" class="ativo">
         <h2>Registrar Treino</h2>
         <form id="form-treino">
@@ -32,6 +33,7 @@
         <div id="lista-treino"></div>
     </section>
 
+    <!-- Seção para Evolução -->
     <section id="evolucao">
         <h2>Minha Evolução</h2>
         <form id="form-evolucao">
@@ -42,11 +44,6 @@
             <button type="submit">Salvar Evolução</button>
         </form>
         <div id="lista-evolucao"></div>
-    </section>
-
-    <section id="treino-dia">
-        <h2>Treino do Dia</h2>
-        <div id="treino-do-dia"></div>
     </section>
 
     <script type="module" src="js/script.js"></script>
