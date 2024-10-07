@@ -58,7 +58,6 @@
                 totalRepeticoes += parseFloat(treino.repeticoes);
                 numTreinos++;
 
-                // Exibindo os treinos de forma mais visual
                 listaTreinosContainer.innerHTML += `
                     <div class="treino-item">
                         <p><strong>Data:</strong> ${treino.data}</p>
@@ -72,7 +71,6 @@
             const mediaPeso = numTreinos > 0 ? (totalPeso / numTreinos).toFixed(2) : 0;
             const mediaRepeticoes = numTreinos > 0 ? (totalRepeticoes / numTreinos).toFixed(2) : 0;
 
-            // Exibindo o resumo de forma organizada
             resumoEvolucaoContainer.innerHTML = `
                 <p><strong>Número Total de Treinos:</strong> ${numTreinos}</p>
                 <p><strong>Média de Peso Levantado:</strong> ${mediaPeso} kg</p>

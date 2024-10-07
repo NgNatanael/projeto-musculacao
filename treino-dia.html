@@ -19,18 +19,8 @@
 
             <div class="treino-container">
                 <div class="treino-card">
-                    <h3><i class="fas fa-arrow-right"></i> Lista A</h3>
-                    <div id="lista-a"></div>
-                </div>
-
-                <div class="treino-card">
-                    <h3><i class="fas fa-arrow-right"></i> Lista B</h3>
-                    <div id="lista-b"></div>
-                </div>
-
-                <div class="treino-card">
-                    <h3><i class="fas fa-arrow-right"></i> Lista C</h3>
-                    <div id="lista-c"></div>
+                    <h3>Exercícios do Dia</h3>
+                    <div id="lista-exercicios-dia"></div>
                 </div>
             </div>
         </section>
@@ -38,71 +28,31 @@
 
     <script type="module">
         document.addEventListener("DOMContentLoaded", () => {
-            const listaAContainer = document.getElementById("lista-a");
-            const listaBContainer = document.getElementById("lista-b");
-            const listaCContainer = document.getElementById("lista-c");
+            const listaExerciciosDiaContainer = document.getElementById("lista-exercicios-dia");
 
-            // Lista A de exercícios
-            const exerciciosA = [
-                "SUPINO RETO",
-                "CROS OVER",
-                "SUPINO INCLINADO",
-                "FLY MAQ",
-                "ROSCA INVERSA",
-                "ROSCA DIRETA",
-                "ROSCA C/ CORDA",
-                "ROSCA SIMULTANEA"
+            // Lista de exercícios para o dia, com ícones representativos
+            const exerciciosDia = [
+                { nome: "SUPINO RETO", icon: "https://linkparaicone/supino.svg" },
+                { nome: "CROS OVER", icon: "https://linkparaicone/crossover.svg" },
+                { nome: "SUPINO INCLINADO", icon: "https://linkparaicone/supinoinclinado.svg" },
+                { nome: "FLY MAQ", icon: "https://linkparaicone/fly.svg" },
+                { nome: "ROSCA INVERSA", icon: "https://linkparaicone/roscainversa.svg" },
+                { nome: "ROSCA DIRETA", icon: "https://linkparaicone/roscadireta.svg" },
+                { nome: "ROSCA C/ CORDA", icon: "https://linkparaicone/roscacorda.svg" },
+                { nome: "ROSCA SIMULTANEA", icon: "https://linkparaicone/roscassimultanea.svg" }
             ];
 
-            // Lista B de exercícios
-            const exerciciosB = [
-                "BICICLETA (15 minutos)",
-                "CADEIRA EXTENSORA",
-                "HACK",
-                "LEG PRESS 45°",
-                "AGACHAMENTO LIVRE",
-                "CADEIRA FLEXORA",
-                "DESENVOLVIMENTO ARTICULADO",
-                "ELEVAÇÃO FRONTAL C/ ANILHAS",
-                "ELEVAÇÃO LATERAL",
-                "ELEVAÇÃO CURVADA",
-                "ELEVAÇÃO DE PERNAS NA PARALELA",
-                "ABDOMINAL",
-                "PRANCHA"
-            ];
-
-            // Lista C de exercícios
-            const exerciciosC = [
-                "PULLEY FRENTE",
-                "PULLDOW",
-                "PULLEY FRENTE C/ TRIANGULO",
-                "REMADA BAIXA POLIA",
-                "HIPEREXTENSÃO LOMBAR",
-                "ENCOLHIMENTO",
-                "TRÍCEPS PULLEY",
-                "TRÍCEPS PULLEY CORDA",
-                "TRÍCEPS FRANCÊS UNI",
-                "TRÍCEPS COICE",
-                "ESTEIRA (15 minutos)"
-            ];
-
-            // Função para adicionar exercícios em uma lista
-            function adicionarExercicios(container, exercicios) {
-                exercicios.forEach(exercicio => {
-                    container.innerHTML += `
-                        <div class="exercicio-item">
-                            <p><strong>${exercicio}</strong></p>
-                            <p>Séries: 4</p>
-                            <p>Intervalo: 30 segundos</p>
-                        </div>
-                    `;
-                });
-            }
-
-            // Adiciona os exercícios às respectivas listas
-            adicionarExercicios(listaAContainer, exerciciosA);
-            adicionarExercicios(listaBContainer, exerciciosB);
-            adicionarExercicios(listaCContainer, exerciciosC);
+            // Função para adicionar exercícios com ícones
+            exerciciosDia.forEach(exercicio => {
+                listaExerciciosDiaContainer.innerHTML += `
+                    <div class="exercicio-item">
+                        <img src="${exercicio.icon}" alt="${exercicio.nome}" class="exercicio-icon">
+                        <p><strong>${exercicio.nome}</strong></p>
+                        <p>Séries: 4</p>
+                        <p>Intervalo: 30 segundos</p>
+                    </div>
+                `;
+            });
         });
     </script>
 </body>
