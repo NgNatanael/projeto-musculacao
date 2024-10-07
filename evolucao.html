@@ -4,20 +4,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evolução de Treinos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
+    <header class="header">
         <h1>Evolução de Treinos</h1>
     </header>
 
-    <section id="evolucao">
-        <h2>Resumo da Evolução</h2>
-        <div id="resumo-evolucao"></div>
+    <main>
+        <section id="evolucao">
+            <h2>Resumo da Evolução</h2>
+            <div id="resumo-evolucao"></div>
 
-        <h2>Treinos Registrados</h2>
-        <div id="lista-treinos-evolucao"></div>
-    </section>
+            <h2>Treinos Registrados</h2>
+            <div id="lista-treinos-evolucao"></div>
+        </section>
+    </main>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
@@ -33,11 +36,9 @@
             measurementId: "G-PCXHZL7650"
         };
 
-        // Inicializa o Firebase e Firestore
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // Função para listar e processar os dados de evolução
         async function listarEvolucao() {
             const listaTreinosContainer = document.getElementById("lista-treinos-evolucao");
             const resumoEvolucaoContainer = document.getElementById("resumo-evolucao");
@@ -53,17 +54,14 @@
                 totalRepeticoes += parseFloat(treino.repeticoes);
                 numTreinos++;
 
-                // Exibir cada treino registrado
                 listaTreinosContainer.innerHTML += `
                     <p>Data: ${treino.data} - Exercício: ${treino.exercicio} - Peso: ${treino.peso}kg - Repetições: ${treino.repeticoes}</p>
                 `;
             });
 
-            // Calcular médias
             const mediaPeso = numTreinos > 0 ? (totalPeso / numTreinos).toFixed(2) : 0;
             const mediaRepeticoes = numTreinos > 0 ? (totalRepeticoes / numTreinos).toFixed(2) : 0;
 
-            // Exibir resumo da evolução
             resumoEvolucaoContainer.innerHTML = `
                 <p>Número Total de Treinos: ${numTreinos}</p>
                 <p>Média de Peso Levantado: ${mediaPeso} kg</p>
@@ -71,7 +69,6 @@
             `;
         }
 
-        // Executa a função ao carregar a página
         window.addEventListener("load", listarEvolucao);
     </script>
 </body>

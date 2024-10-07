@@ -3,35 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitoramento de Treinos e Evolução</title>
+    <title>TreinoTracker - Monitoramento de Treinos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <h1>Monitoramento de Treinos e Evolução</h1>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="logo">TreinoTracker</a>
+            <ul class="nav-menu">
+                <li><a href="#" onclick="mostrarSecao('treino')">Registrar Treino</a></li>
+                <li><a href="evolucao.html" target="_blank">Evolução</a></li>
+                <li><a href="treino-dia.html" target="_blank">Treino do Dia</a></li>
+            </ul>
+        </nav>
     </header>
-    <nav>
-        <button onclick="mostrarSecao('treino')">Registrar Treino</button>
-        <button onclick="window.open('evolucao.html', '_blank')">Evolução</button>
-        <button onclick="window.open('treino-dia.html', '_blank')">Treino do Dia</button>
-    </nav>
 
-    <!-- Seção para Registrar Treino -->
-    <section id="treino" class="ativo">
-        <h2>Registrar Treino</h2>
-        <form id="form-treino">
-            <label for="data-treino">Data:</label>
-            <input type="date" id="data-treino" required>
-            <label for="exercicio">Exercício:</label>
-            <input type="text" id="exercicio" required>
-            <label for="peso">Peso (kg):</label>
-            <input type="number" id="peso" required>
-            <label for="repeticoes">Repetições:</label>
-            <input type="number" id="repeticoes" required>
-            <button type="submit">Salvar Treino</button>
-        </form>
-        <div id="lista-treino"></div>
-    </section>
+    <main>
+        <section id="treino" class="ativo">
+            <h2><i class="fas fa-dumbbell"></i> Registrar Treino</h2>
+            <form id="form-treino" class="form">
+                <label for="data-treino">Data:</label>
+                <input type="date" id="data-treino" required>
+                <label for="exercicio">Exercício:</label>
+                <input type="text" id="exercicio" required>
+                <label for="peso">Peso (kg):</label>
+                <input type="number" id="peso" required>
+                <label for="repeticoes">Repetições:</label>
+                <input type="number" id="repeticoes" required>
+                <button type="submit" class="btn-primary">Salvar Treino</button>
+            </form>
+            <div id="lista-treino" class="treino-list"></div>
+        </section>
+    </main>
 
     <script type="module" src="js/script.js"></script>
 </body>

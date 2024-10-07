@@ -1,51 +1,60 @@
 body {
-    font-family: Arial, sans-serif;
-    text-align: center;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5; /* Cor de fundo suave */
+    background-color: #F5F5F5;
 }
 
-header {
-    background-color: #4CAF50;
+.header {
+    background-color: #2E7D32;
+    padding: 1em 0;
     color: white;
-    padding: 1.5em 0;
+    text-align: center;
 }
 
-nav {
-    margin: 1em 0;
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
-nav button {
-    margin: 10px;
-    padding: 10px 20px;
-    border: none;
-    background-color: #4CAF50;
+.logo {
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+.nav-menu {
+    list-style: none;
+    display: flex;
+}
+
+.nav-menu li {
+    margin-left: 20px;
+}
+
+.nav-menu li a {
     color: white;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    text-decoration: none;
+    font-weight: 500;
 }
 
-nav button:hover, nav button.ativo {
-    background-color: #45a049;
+.nav-menu li a:hover {
+    text-decoration: underline;
 }
 
-section {
-    display: none;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    width: 90%;
-    max-width: 600px;
+main {
+    padding: 2em;
 }
 
-section.ativo {
-    display: block;
+h2 {
+    color: #333;
+    font-size: 2em;
+    margin-bottom: 0.5em;
 }
 
-form label {
+.form label {
     display: block;
     margin-top: 10px;
     font-weight: bold;
@@ -53,7 +62,7 @@ form label {
     margin-bottom: 5px;
 }
 
-form input {
+.form input {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -61,39 +70,27 @@ form input {
     border-radius: 4px;
 }
 
-button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
+.btn-primary {
+    background-color: #2E7D32;
     color: white;
+    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #45a049;
+.btn-primary:hover {
+    background-color: #45A049;
 }
 
-#treino-do-dia, #lista-treino, #lista-evolucao {
-    margin-top: 1em;
-    text-align: left;
-    display: inline-block;
-    width: 100%;
-    max-width: 400px;
-    background-color: #fff;
-    padding: 10px;
-    border-radius: 4px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+.treino-list, #treino-do-dia, #lista-treinos-evolucao {
+    background-color: white;
+    padding: 1em;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
 p {
     font-size: 1.1em;
     line-height: 1.6;
-}
-
-h2, h3 {
-    color: #4CAF50;
-    font-size: 1.5em;
-    margin-bottom: 10px;
 }
