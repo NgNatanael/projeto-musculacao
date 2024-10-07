@@ -17,12 +17,18 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+// Função para alternar entre seções
 function mostrarSecao(secaoId) {
     document.querySelectorAll("section").forEach(secao => secao.classList.remove("ativo"));
-    document.getElementById(secaoId).classList.add("ativo");
+    const secaoSelecionada = document.getElementById(secaoId);
+    if (secaoSelecionada) {
+        secaoSelecionada.classList.add("ativo");
+    } else {
+        console.error(`Seção com ID '${secaoId}' não encontrada.`);
+    }
 }
 
-// Salva o treino no Firestore
+// Função para salvar o treino no Firebase
 async function salvarTreino() {
     const treino = {
         data: document.getElementById("data-treino").value,
@@ -30,39 +36,41 @@ async function salvarTreino() {
         peso: document.getElementById("peso").value,
         repeticoes: document.getElementById("repeticoes").value
     };
+    
     try {
         await addDoc(collection(db, "treinos"), treino);
         console.log("Treino salvo com sucesso!");
-        listarTreinos();
+        listarTreinos(); // Atualiza a lista de treinos após salvar
     } catch (error) {
         console.error("Erro ao salvar treino: ", error);
     }
 }
 
-// Salva a evolução no Firestore
+// Função para salvar a evolução no Firebase
 async function salvarEvolucao() {
     const evolucao = {
         pesoCorporal: document.getElementById("peso-corporal").value,
         observacao: document.getElementById("observacao").value
     };
+    
     try {
-        await addDoc(collection(db, "evolucao"), evolucao);
+        await addDoc(collection(db, "evolucoes"), evolucao);
         console.log("Evolução salva com sucesso!");
-        listarEvolucoes();
+        listarEvolucoes(); // Atualiza a lista de evoluções após salvar
     } catch (error) {
         console.error("Erro ao salvar evolução: ", error);
     }
 }
 
-// Listar treino do dia
+// Função para listar os treinos do dia (com base na data atual)
 async function listarTreinoDoDia() {
-    const hoje = new Date().toISOString().split('T')[0];
+    const hoje = new Date().toISOString().split('T')[0]; // Obtém a data de hoje no formato AAAA-MM-DD
     const treinoDoDiaContainer = document.getElementById("treino-do-dia");
     treinoDoDiaContainer.innerHTML = `<h3>Treino para: ${hoje}</h3>`;
-    
+
     const q = query(collection(db, "treinos"), where("data", "==", hoje));
     const querySnapshot = await getDocs(q);
-    
+
     if (!querySnapshot.empty) {
         querySnapshot.forEach(doc => {
             const treino = doc.data();
@@ -73,10 +81,10 @@ async function listarTreinoDoDia() {
     }
 }
 
-// Listar todos os treinos e evoluções
+// Função para listar todos os treinos salvos
 async function listarTreinos() {
     const listaTreino = document.getElementById("lista-treino");
-    listaTreino.innerHTML = "";
+    listaTreino.innerHTML = ""; // Limpa a lista de treinos antes de atualizá-la
     const querySnapshot = await getDocs(collection(db, "treinos"));
     querySnapshot.forEach(doc => {
         const treino = doc.data();
@@ -84,10 +92,11 @@ async function listarTreinos() {
     });
 }
 
+// Função para listar todas as evoluções salvas
 async function listarEvolucoes() {
     const listaEvolucao = document.getElementById("lista-evolucao");
-    listaEvolucao.innerHTML = "";
-    const querySnapshot = await getDocs(collection(db, "evolucao"));
+    listaEvolucao.innerHTML = ""; // Limpa a lista de evoluções antes de atualizá-la
+    const querySnapshot = await getDocs(collection(db, "evolucoes"));
     querySnapshot.forEach(doc => {
         const evolucao = doc.data();
         listaEvolucao.innerHTML += `<p>${evolucao.pesoCorporal}kg - ${evolucao.observacao}</p>`;
@@ -98,13 +107,13 @@ async function listarEvolucoes() {
 document.getElementById("form-treino").addEventListener("submit", (event) => {
     event.preventDefault();
     salvarTreino();
-    event.target.reset();
+    event.target.reset(); // Limpa o formulário após salvar o treino
 });
 
 document.getElementById("form-evolucao").addEventListener("submit", (event) => {
     event.preventDefault();
     salvarEvolucao();
-    event.target.reset();
+    event.target.reset(); // Limpa o formulário após salvar a evolução
 });
 
 // Carregar dados ao iniciar e mostrar o treino do dia
