@@ -12,7 +12,7 @@
     </header>
     <nav>
         <button onclick="mostrarSecao('treino')">Registrar Treino</button>
-        <button onclick="mostrarSecao('evolucao')">Evolução</button>
+        <button onclick="window.open('evolucao.html', '_blank')">Evolução</button>
         <button onclick="window.open('treino-dia.html', '_blank')">Treino do Dia</button>
     </nav>
 
@@ -31,19 +31,6 @@
             <button type="submit">Salvar Treino</button>
         </form>
         <div id="lista-treino"></div>
-    </section>
-
-    <!-- Seção para Evolução -->
-    <section id="evolucao">
-        <h2>Minha Evolução</h2>
-        <form id="form-evolucao">
-            <label for="peso-corporal">Peso Corporal (kg):</label>
-            <input type="number" id="peso-corporal" required>
-            <label for="observacao">Observação:</label>
-            <input type="text" id="observacao">
-            <button type="submit">Salvar Evolução</button>
-        </form>
-        <div id="lista-evolucao"></div>
     </section>
 
     <script type="module" src="js/script.js"></script>
